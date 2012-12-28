@@ -15,7 +15,7 @@ define java::setup (
   $ensure        = 'present',
   $source        = undef,
   $deploymentdir = '/opt/oracle-java',
-  $updatepath    = '/etc/bashrc',
+  $pathfile      = '/etc/bashrc',
   $cachedir      = "/var/run/puppet/java_setup_working-${name}") {
   /* Validate input values for $ensure */
   if !($ensure in ['present', 'absent']) {

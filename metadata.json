@@ -10,9 +10,9 @@
   "checksums": {
     "Modulefile": "1212155c8aaa6c3755802f1275561f6e",
     "README": "62c0b1258b2533256870319364c8c3bc",
-    "README.md": "0e9b4eebb8ffcb3298839febf9a49105",
+    "README.md": "e3812bea027024498a84c2ebb88974ec",
     "manifests\\init.pp": "d918ea6a4b3dd4cb4c1ca102a8169dcd",
-    "manifests\\setup.pp": "bc4bf62a778c481625e5d3b70b15195b",
+    "manifests\\setup.pp": "a09ba4d3061aaea2f4c2384456050aa5",
     "spec\\spec.opts": "a600ded995d948e393fbe2320ba8e51c",
     "spec\\spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
     "tests\\init.pp": "d4b944ef5f4082f02ac1929edb1d4061"
