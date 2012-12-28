@@ -10,7 +10,7 @@
   "checksums": {
     "Modulefile": "0eae3ccc48e4f7e846556b02a1fbec19",
     "README": "62c0b1258b2533256870319364c8c3bc",
-    "README.md": "608f0f8d2b945734a5d884be5e59fe5f",
+    "README.md": "c13ab1a0d925ef61aca4732a1e7a79cf",
     "files\\jdk-7u7-linux-x64.gz": "15f4b80901111f002894c33a3d78124c",
     "manifests\\init.pp": "d918ea6a4b3dd4cb4c1ca102a8169dcd",
     "manifests\\setup.pp": "bc4bf62a778c481625e5d3b70b15195b",

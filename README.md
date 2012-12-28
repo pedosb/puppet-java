@@ -1,4 +1,4 @@
-puppet-jdk
-==========
+puppet-java
+===========
 
-Puppet module to manage Oracle JDK
+Puppet module to manages Oracle JDK and JRE deployments
