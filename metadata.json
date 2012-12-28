@@ -1,0 +1,22 @@
+{
+  "name": "Francis Pereira-java-",
+  "author": "Francis Pereira",
+  "description": "",
+  "license": "",
+  "project_page": "",
+  "source": "",
+  "summary": "",
+  "version": "0.01",
+  "checksums": {
+    "Modulefile": "0eae3ccc48e4f7e846556b02a1fbec19",
+    "README": "62c0b1258b2533256870319364c8c3bc",
+    "README.md": "608f0f8d2b945734a5d884be5e59fe5f",
+    "files\\jdk-7u7-linux-x64.gz": "15f4b80901111f002894c33a3d78124c",
+    "manifests\\init.pp": "d918ea6a4b3dd4cb4c1ca102a8169dcd",
+    "manifests\\setup.pp": "bc4bf62a778c481625e5d3b70b15195b",
+    "spec\\spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "spec\\spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "tests\\init.pp": "d4b944ef5f4082f02ac1929edb1d4061"
+  },
+  "dependencies": []
+}
