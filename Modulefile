@@ -1,4 +1,4 @@
-name 'java-'
+name 'java'
 version '0.0.1'
 
 author 'Francis Pereira'
