@@ -62,12 +62,27 @@ define java::setup (
       require => Exec["create_target-${name}"],
     }
 
-    exec { "update_path-${name}":
+    exec { "set_java_home-${name}":
       cwd     => '/',
       command => "echo 'export JAVA_HOME=${deploymentdir}/appstack/programs/java' >> ${pathfile}",
-      unless  => 'grep JAVA_HOME=${deploymentdir}/appstack/programs/java ${pathfile}',
+      unless  => "grep 'JAVA_HOME=${deploymentdir}/appstack/programs/java' ${pathfile}",
       require => Exec["move_java-${name}"],
     }
+
+    exec { "update_path-${name}":
+      cwd     => '/',
+      command => "echo 'export PATH=\$PATH:\$JAVA_HOME/bin' >> ${pathfile}",
+      unless  => "grep 'export PATH=\$PATH:\$JAVA_HOME/bin' ${pathfile}",
+      require => Exec["set_java_home-${name}"],
+    }
+
+    exec { "update_classpath-${name}":
+      cwd     => '/',
+      command => "echo 'export CLASSPATH=\$JAVA_HOME/lib/classes.zip' >> ${pathfile}",
+      unless  => "grep 'export CLASSPATH=\$JAVA_HOME/lib/classes.zip' ${pathfile}",
+      require => Exec["set_java_home-${name}"],
+    }
+
   }
 
   # When ensure => absent
