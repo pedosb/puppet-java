@@ -17,18 +17,19 @@ define java::setup (
   $deploymentdir = '/opt/oracle-java',
   $pathfile      = '/etc/bashrc',
   $cachedir      = "/var/run/puppet/java_setup_working-${name}") {
-  /* Validate input values for $ensure */
+  # Validate input values for $ensure
+
   if !($ensure in ['present', 'absent']) {
-    fail('Parameter ensure must either be present or absent')
+    fail('ensure must either be present or absent')
   }
 
-  /* Resource default for Exec */
+  # Resource default for Exec
   Exec {
     path => ['/sbin', '/bin', '/usr/sbin', '/usr/bin'], }
 
-  /* When ensure => present */
+  # When ensure => present
   if ($ensure == 'present') {
-    file { "${cachedir}":
+    file { $cachedir:
       ensure => 'directory',
       owner  => 'root',
       group  => 'root',
@@ -41,7 +42,7 @@ define java::setup (
     }
 
     exec { "extract_java-${name}":
-      cwd     => "${cachedir}",
+      cwd     => $cachedir,
       command => "mkdir extracted; tar -C extracted -xzf *.gz && touch ${cachedir}/.java_extracted",
       creates => "${cachedir}/.java_extracted",
       require => File["${cachedir}/${source}"],
@@ -62,15 +63,15 @@ define java::setup (
     }
   }
 
-  /* When ensure => absent */
+  # When ensure => absent
   if ($ensure == 'absent') {
-    file { "${deploymentdir}":
+    file { $deploymentdir:
       ensure  => absent,
       recurse => true,
       force   => true,
     }
 
-    file { "${cachedir}":
+    file { $cachedir:
       ensure  => absent,
       recurse => true,
       force   => true,
