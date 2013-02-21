@@ -61,6 +61,13 @@ define java::setup (
       creates => "${deploymentdir}/.puppet_java_${name}_deployed",
       require => Exec["create_target-${name}"],
     }
+
+    exec { "update_path-${name}":
+      cwd     => '/',
+      command => "echo 'export JAVA_HOME=${deploymentdir}/appstack/programs/java' >> ${pathfile}",
+      unless  => 'grep JAVA_HOME=${deploymentdir}/appstack/programs/java ${pathfile}',
+      require => Exec["move_java-${name}"],
+    }
   }
 
   # When ensure => absent
