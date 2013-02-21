@@ -1,14 +1,14 @@
 {
-  "name": "Francis Pereira-java-",
+  "name": "Francis Pereira-java",
   "author": "Francis Pereira",
   "description": "",
   "license": "",
-  "project_page": "https://github.com/francispereira/puppet-java",
-  "source": "https://github.com/francispereira/puppet-java",
+  "project_page": "https://github.com/7terminals/puppet-java",
+  "source": "https://github.com/7terminals/puppet-java",
   "summary": "Puppet module to deploy Oracle\u0027s JDK or JRE",
   "version": "0.0.1",
   "checksums": {
-    "Modulefile": "228a39821ccf80f68a24a27462a9ec96",
+    "Modulefile": "0d0a2e667b521d13c17ad2d0a0341d7f",
     "README": "62c0b1258b2533256870319364c8c3bc",
     "README.md": "35c526d3ab2acdc488fccb48e6fae42c",
     "manifests\\init.pp": "d918ea6a4b3dd4cb4c1ca102a8169dcd",
