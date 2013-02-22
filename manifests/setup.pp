@@ -64,8 +64,8 @@ define java::setup (
 
     exec { "set_java_home-${name}":
       cwd     => '/',
-      command => "echo 'export JAVA_HOME=${deploymentdir}/appstack/programs/java' >> ${pathfile}",
-      unless  => "grep 'JAVA_HOME=${deploymentdir}/appstack/programs/java' ${pathfile}",
+      command => "echo 'export JAVA_HOME=${deploymentdir}' >> ${pathfile}",
+      unless  => "grep 'JAVA_HOME=${deploymentdir}' ${pathfile}",
       require => Exec["move_java-${name}"],
     }
 
