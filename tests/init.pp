@@ -1,5 +1,5 @@
-java::setup { 'jdk_7u7':
+java::setup { 'jdk_6u35':
   ensure        => present,
-  source        => 'jdk-7u7-linux-x64.gz',
-  deploymentdir => '/opt/jdk-7u7-x64',
+  source        => 'jdk-6u35-linux-x64.tar.gz',
+  deploymentdir => '/home/jude/jdk',
 }

@@ -1,2 +1,4 @@
-/.settings
-/.project
+*.tar.bz2
+*.gz
+*.zip
+*.tar

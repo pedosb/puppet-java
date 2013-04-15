@@ -17,15 +17,31 @@ define java::setup (
   $deploymentdir = '/opt/oracle-java',
   $pathfile      = '/etc/bashrc',
   $cachedir      = "/var/run/puppet/java_setup_working-${name}") {
-  # Validate input values for $ensure
+  # we support only Debian and RedHat
+  case $::osfamily {
+    Debian  : { $supported = true }
+    RedHat  : { $supported = true }
+    default : { fail("The ${module_name} module is not supported on ${::osfamily} based systems") }
+  }
 
+  # validate parameters
+  if ($source == undef) {
+    fail('source parameter must be set')
+  }
+
+  # Validate input values for $ensure
   if !($ensure in ['present', 'absent']) {
     fail('ensure must either be present or absent')
+  }
+  
+  if ($caller_module_name == undef) {
+    $caller_module_name = $module_name
   }
 
   # Resource default for Exec
   Exec {
-    path => ['/sbin', '/bin', '/usr/sbin', '/usr/bin'], }
+    path => ['/sbin', '/bin', '/usr/sbin', '/usr/bin'],
+  }
 
   # When ensure => present
   if ($ensure == 'present') {
@@ -82,11 +98,7 @@ define java::setup (
       unless  => "grep 'export CLASSPATH=\$JAVA_HOME/lib/classes.zip' ${pathfile}",
       require => Exec["set_java_home-${name}"],
     }
-
-  }
-
-  # When ensure => absent
-  if ($ensure == 'absent') {
+  } else {
     file { $deploymentdir:
       ensure  => absent,
       recurse => true,
