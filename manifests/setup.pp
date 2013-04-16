@@ -16,7 +16,8 @@ define java::setup (
   $source        = undef,
   $deploymentdir = '/opt/oracle-java',
   $pathfile      = '/etc/bashrc',
-  $cachedir      = "/var/run/puppet/java_setup_working-${name}") {
+  $cachedir      = "/var/run/puppet/java_setup_working-${name}",
+  $user          = undef) {
   # we support only Debian and RedHat
   case $::osfamily {
     Debian  : { $supported = true }
@@ -28,14 +29,19 @@ define java::setup (
   if ($source == undef) {
     fail('source parameter must be set')
   }
+  if ($user == undef) {
+    fail('user parameter must be set')
+  }
 
   # Validate input values for $ensure
   if !($ensure in ['present', 'absent']) {
     fail('ensure must either be present or absent')
   }
-  
+
   if ($caller_module_name == undef) {
-    $caller_module_name = $module_name
+    $mod_name = $module_name
+  } else {
+    $mod_name = $caller_module_name
   }
 
   # Resource default for Exec
@@ -53,7 +59,7 @@ define java::setup (
     }
 
     file { "${cachedir}/${source}":
-      source  => "puppet:///modules/${caller_module_name}/${source}",
+      source  => "puppet:///modules/${mod_name}/${source}",
       require => File[$cachedir],
     }
 
@@ -73,7 +79,8 @@ define java::setup (
 
     exec { "move_java-${name}":
       cwd     => "${cachedir}/extracted",
-      command => "cp -r */* ${deploymentdir}/ && touch ${deploymentdir}/.puppet_java_${name}_deployed",
+      command => 
+      "cp -r */* ${deploymentdir}/ && chown -R ${user}:${user} ${deploymentdir} && touch ${deploymentdir}/.puppet_java_${name}_deployed",
       creates => "${deploymentdir}/.puppet_java_${name}_deployed",
       require => Exec["create_target-${name}"],
     }
