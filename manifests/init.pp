@@ -1,15 +1,22 @@
 # Class: java
 #
-# This module manages Oracle JDK and JRE
+# The Java module allows Puppet to install the JDK/JRE
+# and update the bashrc file to include java in the path.
 #
-# Parameters:
+# Provides: java::setup resource definition
 #
-# Actions:
-#
-# Requires:
+# Parameters: ensure, source, deploymentdir, user, pathfile
 #
 # Sample Usage:
+#    java::setup { "example.com-jdk_6u35":
+#      ensure        => 'present',
+#      source        => 'jdk-6u35-linux-x64.tar.gz',
+#      deploymentdir => '/home/example.com/apps/jdk-6u35',
+#      user          => 'example.com',
+#      pathfile      => '/home/example.com/.bashrc'
+#    }
 #
-# [Remember: No empty lines between comments and class definition]
+# Refer to the module README for more information
+#
 class java {
 }

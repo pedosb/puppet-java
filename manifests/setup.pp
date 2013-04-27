@@ -1,16 +1,3 @@
-# Define: java::setup
-#
-# This module manages Oracle JDK and JRE deployments
-#
-# Parameters:
-#
-# Actions:
-#
-# Requires:
-#
-# Sample Usage:
-#
-# [Remember: No empty lines between comments and class definition]
 define java::setup (
   $ensure        = 'present',
   $source        = undef,
