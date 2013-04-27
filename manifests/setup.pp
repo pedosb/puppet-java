@@ -1,4 +1,10 @@
-define java::setup ($ensure = 'present', $source = undef, $deploymentdir = '/opt/oracle-java', $pathfile = '/etc/bashrc', $cachedir = "/var/run/puppet/java_setup_working-${name}", $user = undef) {
+define java::setup (
+  $ensure        = 'present',
+  $source        = undef,
+  $deploymentdir = '/opt/oracle-java',
+  $pathfile      = '/etc/bashrc',
+  $cachedir      = "/var/run/puppet/java_setup_working-${name}",
+  $user          = undef) {
   # We support only Debian and RedHat
   case $::osfamily {
     Debian  : { $supported = true }
@@ -15,7 +21,7 @@ define java::setup ($ensure = 'present', $source = undef, $deploymentdir = '/opt
     fail('user parameter must be set')
   }
 
-  # Validate source is .tar or .tar.gz
+  # Validate source is .gz or .tar.gz
   if !(('.tar.gz' in $::fqdn) or ('.gz' in $::fqdn)) {
     fail('source must be either .tar.gz or .gz')
   }
