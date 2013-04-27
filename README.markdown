@@ -50,7 +50,7 @@ Valid arguments are "present" or "absent". Default
 
 This parameter specifies the source for the java archive. 
 This file must be in the files directory in the caller module. 
-**Only .tar.gz source archives are supported.**
+**Only .tar.gz and .gz source archives are supported.**
 
 ####`deploymentdir`
 
@@ -90,6 +90,6 @@ Bug Reports
 Release Notes
 --------------
 
-**0.1.0**
+**0.0.1**
 
 First initial release.

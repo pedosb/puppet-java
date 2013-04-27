@@ -16,7 +16,7 @@
 #      pathfile      => '/home/example.com/.bashrc'
 #    }
 #
-# Refer to the module README for more information
+# Refer to the module README for documentation
 #
 class java {
 }
