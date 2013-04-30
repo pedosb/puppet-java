@@ -22,7 +22,7 @@ define java::setup (
   }
 
   # Validate source is .gz or .tar.gz
-  if !(('.tar.gz' in $::fqdn) or ('.gz' in $::fqdn)) {
+  if !(('.tar.gz' in $source) or ('.gz' in $source)) {
     fail('source must be either .tar.gz or .gz')
   }
 
