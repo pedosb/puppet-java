@@ -89,6 +89,8 @@ Bug Reports
 
 Release Notes
 --------------
+**0.0.2**
+#1 - fixed validation error
 
 **0.0.1**
 
