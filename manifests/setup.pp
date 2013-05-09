@@ -52,7 +52,7 @@ define java::setup (
     }
 
     file { "${cachedir}/${source}":
-      source  => "puppet:///modules/java/${source}",
+      source  => "puppet:///modules/${mod_name}/${source}",
       require => File[$cachedir],
     }
 
