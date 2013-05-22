@@ -101,6 +101,9 @@ Bug Reports
 
 Release Notes
 --------------
+**0.0.4**
+\#5 - search term 'java' on forge.puppetlabs.com friendly
+
 **0.0.3**
 \#2 - added support for $::osfamily = Suse
 
