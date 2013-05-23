@@ -23,8 +23,8 @@ define java::setup (
   }
 
   # Validate source is .gz or .tar.gz
-  if !(('.tar.gz' in $source) or ('.gz' in $source)) {
-    fail('source must be either .tar.gz or .gz')
+  if !(('.tar.gz' in $source) or ('.gz' in $source) or ('.bin' in $source)) {
+    fail('source must be either .tar.gz or .gz or .bin')
   }
 
   # Validate input values for $ensure
@@ -40,7 +40,8 @@ define java::setup (
 
   # Resource default for Exec
   Exec {
-    path => ['/sbin', '/bin', '/usr/sbin', '/usr/bin'], }
+    path => ['/sbin', '/bin', '/usr/sbin', '/usr/bin'],
+  }
 
   # When ensure => present
   if ($ensure == 'present') {
@@ -56,9 +57,15 @@ define java::setup (
       require => File[$cachedir],
     }
 
+    if ('.bin' in $source) {
+      $extract_command = "unzip *.bin -d extracted"
+    } else {
+      $extract_command = "tar -C extracted -xzf *.gz"
+    }
+
     exec { "extract_java-${name}":
       cwd     => $cachedir,
-      command => "mkdir extracted; tar -C extracted -xzf *.gz && touch ${cachedir}/.java_extracted",
+      command => "mkdir extracted; ${extract_command} && touch ${cachedir}/.java_extracted",
       creates => "${cachedir}/.java_extracted",
       require => File["${cachedir}/${source}"],
     }
@@ -72,7 +79,8 @@ define java::setup (
 
     exec { "move_java-${name}":
       cwd     => "${cachedir}/extracted",
-      command => "cp -r */* ${deploymentdir}/ && chown -R ${user}:${user} ${deploymentdir} && touch ${deploymentdir}/.puppet_java_${name}_deployed",
+      command => 
+      "cp -r */* ${deploymentdir}/ && chown -R ${user}:${user} ${deploymentdir} && touch ${deploymentdir}/.puppet_java_${name}_deployed",
       creates => "${deploymentdir}/.puppet_java_${name}_deployed",
       require => Exec["create_target-${name}"],
     }
