@@ -60,7 +60,9 @@ Valid arguments are "present" or "absent". Default
 ####`source`
 
 This parameter specifies the source for the java archive. 
-This file must be in the files directory in the caller module. 
+This file must be in the files directory in the caller module.
+Value should be the exact name of the downloaded JDK or JRE archive file put in the files directory
+
 **Only .tar.gz, .gz or .bin format as provided on Oracle's download website are supported.**
 
 ####`deploymentdir`
