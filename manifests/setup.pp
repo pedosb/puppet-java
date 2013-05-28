@@ -57,16 +57,21 @@ define java::setup (
     }
 
     if ('.bin' in $source) {
-      $extract_command = 'unzip *.bin -d extracted'
+      exec { "extract_java-${name}":
+        cwd     => $cachedir,
+        command => "mkdir extracted; unzip *.bin -d extracted && touch ${cachedir}/.java_extracted",
+        creates => "${cachedir}/.java_extracted",
+        # in case of a bin archive, we get a return code of 1 from unzip. This is ok
+        returns => [0, 1],
+        require => File["${cachedir}/${source}"],
+      }
     } else {
-      $extract_command = 'tar -C extracted -xzf *.gz'
-    }
-
-    exec { "extract_java-${name}":
-      cwd     => $cachedir,
-      command => "mkdir extracted; ${extract_command} && touch ${cachedir}/.java_extracted",
-      creates => "${cachedir}/.java_extracted",
-      require => File["${cachedir}/${source}"],
+      exec { "extract_java-${name}":
+        cwd     => $cachedir,
+        command => "mkdir extracted; tar -C extracted -xzf *.gz && touch ${cachedir}/.java_extracted",
+        creates => "${cachedir}/.java_extracted",
+        require => File["${cachedir}/${source}"],
+      }
     }
 
     exec { "create_target-${name}":
