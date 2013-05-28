@@ -5,7 +5,7 @@ define java::setup (
   $pathfile      = '/etc/bashrc',
   $cachedir      = "/var/run/puppet/java_setup_working-${name}",
   $user          = undef) {
-  # We support only Debian and RedHat
+  # We support only Debian, RedHat and Suse
   case $::osfamily {
     Debian  : { $supported = true }
     RedHat  : { $supported = true }
@@ -40,8 +40,7 @@ define java::setup (
 
   # Resource default for Exec
   Exec {
-    path => ['/sbin', '/bin', '/usr/sbin', '/usr/bin'],
-  }
+    path => ['/sbin', '/bin', '/usr/sbin', '/usr/bin'], }
 
   # When ensure => present
   if ($ensure == 'present') {
@@ -58,9 +57,9 @@ define java::setup (
     }
 
     if ('.bin' in $source) {
-      $extract_command = "unzip *.bin -d extracted"
+      $extract_command = 'unzip *.bin -d extracted'
     } else {
-      $extract_command = "tar -C extracted -xzf *.gz"
+      $extract_command = 'tar -C extracted -xzf *.gz'
     }
 
     exec { "extract_java-${name}":
@@ -79,8 +78,7 @@ define java::setup (
 
     exec { "move_java-${name}":
       cwd     => "${cachedir}/extracted",
-      command => 
-      "cp -r */* ${deploymentdir}/ && chown -R ${user}:${user} ${deploymentdir} && touch ${deploymentdir}/.puppet_java_${name}_deployed",
+      command => "cp -r */* ${deploymentdir}/ && chown -R ${user}:${user} ${deploymentdir} && touch ${deploymentdir}/.puppet_java_${name}_deployed",
       creates => "${deploymentdir}/.puppet_java_${name}_deployed",
       require => Exec["create_target-${name}"],
     }
@@ -119,4 +117,3 @@ define java::setup (
     }
   }
 }
-

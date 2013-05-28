@@ -61,7 +61,7 @@ Valid arguments are "present" or "absent". Default
 
 This parameter specifies the source for the java archive. 
 This file must be in the files directory in the caller module. 
-**Only .tar.gz and .gz source archives are supported.**
+**Only .tar.gz, .gz or .bin format as provided on Oracle's download website are supported.**
 
 ####`deploymentdir`
 
@@ -101,6 +101,9 @@ Bug Reports
 
 Release Notes
 --------------
+**0.0.5**
+\#6 - native support from .bin format of JDK / JRE as provided in Oracle's download section
+
 **0.0.4**
 \#5 - search term 'java' on forge.puppetlabs.com friendly
 
