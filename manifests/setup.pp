@@ -53,13 +53,14 @@ define java::setup (
 
     file { "${cachedir}/${source}":
       source  => "puppet:///modules/${mod_name}/${source}",
+      mode    => '711',
       require => File[$cachedir],
     }
 
     if ('.bin' in $source) {
       exec { "extract_java-${name}":
         cwd     => $cachedir,
-        command => "mkdir extracted; ./*.bin  <> echo '\n\n' -d extracted && touch ${cachedir}/.java_extracted",
+        command => "mkdir extracted; cd extracted ;  ../*.bin  <> echo '\n\n' -d extracted && touch ${cachedir}/.java_extracted",
         creates => "${cachedir}/.java_extracted",
         # in case of a bin archive, we get a return code of 1 from unzip. This is ok
         returns => [0, 1],
