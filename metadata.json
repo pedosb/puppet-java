@@ -6,9 +6,9 @@
   "project_page": "https://github.com/7terminals/puppet-java",
   "source": "https://github.com/7terminals/puppet-java",
   "summary": "Puppet module to deploy Oracle\u0027s ( formerly Sun Microsystems ) JDK or JRE ( Java )",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "checksums": {
-    "Modulefile": "39d01b3aade20ea4e3d01cfa66400fc0",
+    "Modulefile": "5adb2fc14db03fe35bf9327793f17734",
     "README.markdown": "2ca01d8c5790f1c9dfef281004ddb6e9",
     "manifests\\init.pp": "146a643feec9f4e3cd489ccc8539f8b9",
     "manifests\\setup.pp": "0b777ed823bf818b509949673b219c5d",

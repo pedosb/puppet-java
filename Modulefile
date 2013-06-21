@@ -1,5 +1,5 @@
 name '7terminals-java'
-version '0.0.5'
+version '0.0.6'
 
 author 'Francis Pereira'
 license 'The MIT License (MIT)
