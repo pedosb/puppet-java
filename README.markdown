@@ -103,6 +103,9 @@ Bug Reports
 
 Release Notes
 --------------
+**0.0.6**
+\#7 - added module license
+
 **0.0.5**
 \#6 - native support from .bin format of JDK / JRE as provided in Oracle's download section
 
