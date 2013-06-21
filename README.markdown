@@ -103,6 +103,9 @@ Bug Reports
 
 Release Notes
 --------------
+**0.0.7**
+\#7 - license added according to module specs
+
 **0.0.6**
 \#7 - added module license
 
