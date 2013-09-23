@@ -97,8 +97,8 @@ define java::setup (
 
     exec { "update_path-${name}":
       cwd     => '/',
-      command => "echo 'export PATH=\$PATH:\$JAVA_HOME/bin' >> ${pathfile}",
-      unless  => "grep 'export PATH=\$PATH:\$JAVA_HOME/bin' ${pathfile}",
+      command => "echo 'export PATH=\$JAVA_HOME/bin:\$PATH' >> ${pathfile}",
+      unless  => "grep 'export PATH=\$JAVA_HOME/bin:\$PATH' ${pathfile}",
       require => Exec["set_java_home-${name}"],
     }
 
