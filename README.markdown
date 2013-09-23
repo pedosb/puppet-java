@@ -103,6 +103,10 @@ Bug Reports
 
 Release Notes
 --------------
+**0.0.8**
+\#10 - prepend JAVA_HOME to PATH instead of appending it
+\#9 - improved module stability when default $cache_dir does not exist
+
 **0.0.7**
 \#7 - license added according to module specs
 
