@@ -50,7 +50,7 @@ define java::setup (
       creates => $cachedir,
     }
 
-    file { "${cachedir}/${source}.mf":
+    file { "${cachedir}/java.mf":
       source  => "${source}",
       mode    => '711',
       require => Exec["create-${cachedir}"],
@@ -63,14 +63,14 @@ define java::setup (
         creates => "${cachedir}/.java_extracted",
         # in case of a bin archive, we get a return code of 1 from unzip. This is ok
         returns => [0, 1],
-        require => File["${cachedir}/${source}.mf"],
+        require => File["${cachedir}/java.mf"],
       }
     } else {
       exec { "extract_java-${name}":
         cwd     => $cachedir,
         command => "mkdir extracted; tar -C extracted -xzf *.mf && touch ${cachedir}/.java_extracted",
         creates => "${cachedir}/.java_extracted",
-        require => File["${cachedir}/${source}.mf"],
+        require => File["${cachedir}/java.mf"],
       }
     }
 
