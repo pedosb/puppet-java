@@ -22,6 +22,11 @@ define java::setup (
     fail('user parameter must be set')
   }
 
+  # Validate source is .gz or .tar.gz
+  if !(('.tar.gz' in $source) or ('.gz' in $source) or ('.bin' in $source)) {
+    fail('source must be either .tar.gz or .gz or .bin')
+  }
+
   # Validate input values for $ensure
   if !($ensure in ['present', 'absent']) {
     fail('ensure must either be present or absent')
@@ -45,7 +50,7 @@ define java::setup (
       creates => $cachedir,
     }
 
-    file { "${cachedir}/${source}":
+    file { "${cachedir}/${source}.mf":
       source  => "${source}",
       mode    => '711',
       require => Exec["create-${cachedir}"],
@@ -54,18 +59,18 @@ define java::setup (
     if ('.bin' in $source) {
       exec { "extract_java-${name}":
         cwd     => $cachedir,
-        command => "mkdir extracted; cd extracted ;  ../*.bin  <> echo '\n\n' -d extracted && touch ${cachedir}/.java_extracted",
+        command => "mkdir extracted; cd extracted ;  ../*.mf  <> echo '\n\n' -d extracted && touch ${cachedir}/.java_extracted",
         creates => "${cachedir}/.java_extracted",
         # in case of a bin archive, we get a return code of 1 from unzip. This is ok
         returns => [0, 1],
-        require => File["${cachedir}/${source}"],
+        require => File["${cachedir}/${source}.mf"],
       }
     } else {
       exec { "extract_java-${name}":
         cwd     => $cachedir,
-        command => "mkdir extracted; tar -C extracted -xzf *.gz && touch ${cachedir}/.java_extracted",
+        command => "mkdir extracted; tar -C extracted -xzf *.mf && touch ${cachedir}/.java_extracted",
         creates => "${cachedir}/.java_extracted",
-        require => File["${cachedir}/${source}"],
+        require => File["${cachedir}/${source}.mf"],
       }
     }
 
