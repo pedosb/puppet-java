@@ -22,11 +22,6 @@ define java::setup (
     fail('user parameter must be set')
   }
 
-  # Validate source is .gz or .tar.gz
-  if !(('.tar.gz' in $source) or ('.gz' in $source) or ('.bin' in $source)) {
-    fail('source must be either .tar.gz or .gz or .bin')
-  }
-
   # Validate input values for $ensure
   if !($ensure in ['present', 'absent']) {
     fail('ensure must either be present or absent')
@@ -51,7 +46,7 @@ define java::setup (
     }
 
     file { "${cachedir}/${source}":
-      source  => "puppet:///modules/${mod_name}/${source}",
+      source  => "${source}",
       mode    => '711',
       require => Exec["create-${cachedir}"],
     }
